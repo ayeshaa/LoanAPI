@@ -1,0 +1,84 @@
+﻿@*@model IEnumerable<ChargeAfter.Areas.Admin.ViewModels.TransactionViewModel>*@
+@using ChargeAfter.Areas.Admin.ViewModels;
+    @{
+    ViewBag.Title = "Refund";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Refund</h2>
+<div class="page-content">
+    <ol class="breadcrumb">
+
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Transactions</a></li>
+        <li class="active"><a href="ui-tables.html">report</a></li>
+    </ol>
+    <div class="container-fluid">
+
+        <div data-widget-group="group1">
+
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default" data-widget='{"draggable": "false"}'>
+                        <div class="panel-heading">
+                            <h2>Bordered Tables</h2>
+                            <div class="panel-ctrls" data-actions-container="" data-action-collapse='{"target": ".panel-body"}'></div>
+                            <div class="options">
+                            </div>
+                        </div>
+                        <div class="panel-body">
+
+                            <table class="table table-bordered table-striped table-hover table-fixed-header m-n dataTable" cellspacing="0">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">Transaction Id</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Transaction Count</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Loan Id</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Transaction Status</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Transaction Amount </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Transaction Type</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Parent TransactionId</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Transaction Error </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Transaction Date</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr role="row" class="odd">
+                                            <td>@item.transactions.transactionId</td>
+                                            <td>@item.count</td>
+                                            <td>@item.laonId</td>
+                                          
+                                            <td>@item.transactions.transactionStatus</td>
+                                            @if (item.transactions.transactionAmount != null)
+                                            {
+                                                <td>@item.transactions.transactionAmount</td>
+                                            }
+                                            else
+                                            {
+                                                <td>No Transaction</td>
+                                            }
+                                            <td class="sorting_1">@item.transactions.transactionType</td>
+                                            <td>@item.transactions.parentTransactionId</td>
+                                            <td>@item.transactions.transactionError</td>
+
+
+                                            <td>@item.transactions.transactionDate</td>
+                                            <td><a href="/User/Refund/@item.transactions.parentTransactionId"><i class="fa fa-arrow-circle-o-left fa-2x"></i></a></td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div> 
+

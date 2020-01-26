@@ -1,0 +1,333 @@
+﻿@model IEnumerable<ChargeAfter.ViewModel.TBL>
+
+
+    @{
+    ViewBag.Title = "B&H Transactions";
+    }
+    @{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    }
+
+
+                    <div class="page-content">
+                        <ol class="breadcrumb">
+
+                            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                            <li><a href="#">Transactions</a></li>
+                            <li class="active"><a href="ui-tables.html">report</a></li>
+                        </ol>
+                        <div class="container-fluid">
+
+                            <div data-widget-group="group1">
+                                
+                                
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="panel panel-default" data-widget='{"draggable": "false"}'>
+                                            <div class="panel-heading">
+                                                <h2>Bordered Tables</h2>
+                                                <div class="panel-ctrls" data-actions-container="" data-action-collapse='{"target": ".panel-body"}'></div>
+                                                <div class="options">
+                                                </div>
+                                            </div>
+                                            <div class="panel-body">
+                                               
+                                                <table class="table table-bordered table-striped table-hover table-fixed-header m-n dataTable" cellspacing="0">
+                                                    <thead>
+                                                        <tr role="row">
+                                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">Transaction Id</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Borrower Name</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Date </th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Amount</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Lender Name</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Status </th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"></th>
+                                                            
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+@foreach (var item in Model)
+{
+    <tr role="row" class="odd">
+        <td>10000-@item.Id</td>
+        <td>@item.FirstName @item.LastName</td>
+        <td>@item.rDate</td>
+        @if (item.Amount != null)
+        {
+        <td>@item.Amount</td>
+        }
+        else
+        {
+            <td>899</td>
+        }
+        @if (item.lender != null)
+        {
+            <td class="sorting_1">@item.lender</td>
+        }
+        else
+        {
+        <td class="sorting_1">Fortiva</td> }
+        
+        <td>@item.Status</td>
+
+
+        <td><a href="javascript:DetailWorker(@item.Id)" class="" ><i class="fa fa-eye fa-2x"></i></td>
+
+    </tr>
+}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                </div>
+                            </div>
+                        </div> 
+
+              
+  
+
+<div id="DetailWorker" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width:850px">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body" id="data">
+                <section class="content padding-top-50" style="background-color:gainsboro; padding:20px; padding-bottom:0 ; min-height:750px">
+                    <div class="col-md-12" style="padding:0">
+                        <div class="nav-tabs-custom" style="background-color:#fff; border-top-color:none; box-shadow:none; border-radius:0; padding:20px; height:700px">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="">
+                                        <label style="display:inline-block">Transaction #</label>
+                                        <h5 style="display:inline-block" id="tid"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">First Name: </label>
+                                        <h5 style="display:inline-block" id="DName"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">LastName: </label>
+                                        <h5 style="display:inline-block" id="LastName"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">Email: </label>
+                                        <h5 style="display:inline-block" id="rEmail"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">Amount: </label>
+                                        <h5 style="display:inline-block" id="amount"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">Status: </label>
+                                        <h5 style="display:inline-block" id="status"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">Duration: </label>
+                                        <h5 style="display:inline-block" id="Duration"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">isPreQualifyOffer: </label>
+                                        <h5 style="display:inline-block" id="isPreQualifyOffer"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">annualFee: </label>
+                                        <h5 style="display:inline-block" id="annualFee"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">ApprovedAmmount: </label>
+                                        <h5 style="display:inline-block" id="ApprovedAmmount"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">eligibility: </label>
+                                        <h5 style="display:inline-block" id="eligibility"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">Intrest: </label>
+                                        <h5 style="display:inline-block" id="Intrest"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">IncreasePercent: </label>
+                                        <h5 style="display:inline-block" id="IncreasePercent"></h5>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="">
+                                        <label style="display:inline-block">Employement Status: </label>
+                                        <h5 style="display:inline-block" id="empS"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">Housing Status: </label>
+                                        <h5 style="display:inline-block" id="HousingS"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">GrossAnnualIndividual: </label>
+                                        <h5 style="display:inline-block" id="gaIndivial"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">NetMonthlyIncome: </label>
+                                        <h5 style="display:inline-block" id="NetIncom"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">SalaryFrequency: </label>
+                                        <h5 style="display:inline-block" id="salary"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">eligibility: </label>
+                                        <h5 style="display:inline-block" id="eligibility"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">offerId: </label>
+                                        <h5 style="display:inline-block" id="offerId"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">term: </label>
+                                        <h5 style="display:inline-block" id="term"></h5>
+                                    </div>
+
+                                    <div class="">
+                                        <label style="display:inline-block">MonthCount: </label>
+                                        <h5 style="display:inline-block" id="MonthCount"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">loanId: </label>
+                                        <h5 style="display:inline-block" id="loanId"></h5>
+                                    </div>
+                                    <div class="">
+                                        <label style="display:inline-block">Address: </label>
+                                        <h5 style="display:inline-block" id="rAddress"></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-left:20px">
+                                <div class="form-group">
+
+                                    <a href="/User/Refund"><input type="button" class="btn btn-warning" value="Refund" /></a>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </section>
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        function DetailWorker(id) {
+            $.ajax({
+                url: "@Url.Action("Details", "User")",
+                type: 'GET',
+            data: {
+                id: id,
+                },
+            dataType: "text json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $('#DetailWorker').modal('show');
+                $('#DName').text(data.query.FirstName);
+                $('#tid').text("10000-" + data.query.Id);
+                $('#rEmail').text(data.query.Email);
+                $('#amount').text(data.query.Amount)
+                $('#status').text(data.query.Status);
+                $("#empS").text(data.query.EmpStatus);
+                $("#HousingS").text(data.query.HousingStatus);
+                $("#gaIndivial").text(data.query.GrossIndividual);
+                $("#NetIncom").text(data.query.NetIncom);
+                $("#salary").text(data.query.SalaryFrequency);
+
+                
+                $('#annualFee').text(data.query.annualFee);
+                $('#ApprovedAmmount').text(data.query.ApprovedAmmount);
+                $('#eligibility').text(data.query.eligibility);
+                $('#Intrest').text(data.query.Intrest);
+                $('#IncreasePercent').text(data.query.IncreasePercent);
+                $('#Duration').text(data.query.Duration);
+                $('#isPreQualifyOffer').text(data.query.isPreQualifyOffer);
+                $('#offerId').text(data.query.offerId);
+                $('#MonthCount').text(data.query.MonthCount);
+                $('#loanId').text(data.query.loanId);
+                $('#term').text(data.query.term);
+
+                $('#rAddress').text(data.query.address + " " + data.query.city + " " + data.query.state + " " + data.query.country + " " + data.query.zip);
+
+
+                $("#rAddress").text(data.query.address + " " + data.query.city + " " + data.query.state + " " + data.query.country + " " + data.query.zip);
+            },
+            error: function (xhr) {
+                alert("fail");
+            }
+        });
+        }
+
+    //$(function () {
+    //    $(".jjjanchorDetail").click(function () {
+    //        debugger;
+    //        var $buttonClicked = $(this);
+    //        var id = $buttonClicked.attr('data-id');
+    //        var options = { "backdrop": "static", keyboard: true };
+    //        $.ajax({
+    //            type: "GET",
+    //            url: '/Admin/User/Details',
+    //            contentType: "application/json; charset=utf-8",
+    //            data: { "Id": id },
+    //            datatype: "json",
+    //            success: function (data) {
+    //                $('#DetailWorker').modal('show');
+    //                $('#DName').text(data.query.FirstName);
+    //                $('#LastName').text(data.query.LastName);
+    //                $('#tid').text("10000-" + data.query.Id);
+    //                $('#rEmail').text(data.query.Email);
+    //                $('#amount').text(data.query.Amount)
+    //                $('#status').text(data.query.Status);
+    //                $('#empS').text(data.query.EmpStatus);
+    //                $('#HousingS').text(data.query.HousingStatus);
+    //                $('#gaIndivial').text(data.query.GrossIndividual);
+    //                $('#NetIncom').text(data.query.NetIncom);
+    //                $('#salary').text(data.query.SalaryFrequency);
+    //                $('#annualFee').text(data.query.annualFee);
+    //                $('#ApprovedAmmount').text(data.query.ApprovedAmmount);
+    //                $('#eligibility').text(data.query.eligibility);
+    //                $('#Intrest').text(data.query.Intrest);
+    //                $('#IncreasePercent').text(data.query.IncreasePercent);
+    //                $('#Duration').text(data.query.Duration);
+    //                $('#isPreQualifyOffer').text(data.query.isPreQualifyOffer);
+    //                $('#offerId').text(data.query.offerId);
+    //                $('#MonthCount').text(data.query.MonthCount);
+    //                $('#loanId').text(data.query.loanId);
+    //                $('#term').text(data.query.term);
+
+    //                $('#rAddress').text(data.query.address + " " + data.query.city + " " + data.query.state + " " + data.query.country + " " + data.query.zip);
+                   
+    //            },
+    //            error: function () {
+                   
+    //                alert("Dynamic content load failed.");
+    //            }
+    //        });
+    //    });
+    //    //$("#closebtn").on('click',function(){
+    //    //    $('#myModal').modal('hide');
+
+    //    $("#closbtn").click(function () {
+    //        $('#myModal').modal('hide');
+    //    });
+    //});
+
+
+    </script>
